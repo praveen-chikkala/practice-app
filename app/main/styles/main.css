@@ -1,0 +1,10 @@
+.error-text {
+    border: none;
+    padding: 10px;
+    color: red;
+    padding-top: 0px;
+}
+
+.elem-bottomSpace {
+    margin-bottom: 10px;
+}
