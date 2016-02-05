@@ -3,6 +3,7 @@ angular.module('main', [
         'ionic',
         'ngCordova',
         'ui.router',
+        'ngStorage'
         // TODO: load other modules selected during generation
     ])
     .config(function($stateProvider, $urlRouterProvider) {
@@ -14,7 +15,8 @@ angular.module('main', [
                 controller: 'loginCtrl as loginController'
             }).state('signUp', {
                 url: "/signUp",
-                templateUrl: 'main/templates/signUp.html'
+                templateUrl: 'main/templates/signUp.html',
+                controller: 'signUpCtrl as signUpController'
             }).state('forgotPwd', {
                 url: "/forgotPwd",
                 templateUrl: 'main/templates/forgotPwd.html'

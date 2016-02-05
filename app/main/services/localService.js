@@ -1,5 +1,5 @@
 var app = angular.module('main');
-app.service('localService', ['$localStorage', function($locastorage) {
+app.service('localService', ['$localStorage', function($localStorage) {
     this.loggedUserData = {};
     this.getRegisteredUsers = function() {
         return $localStorage.registeredUsers;
@@ -9,12 +9,12 @@ app.service('localService', ['$localStorage', function($locastorage) {
             userName: uname,
             password: pwd
         };
-        var usersList = [];
-        _.each($localStorage.registeredUsers, function(userNew) {
-            usersList.push(userNew);
-        });
-        usersList.push(user);
-        $localStorage.registeredUsers = usersList;
+        // var usersList = [];
+        // _.each($localStorage.registeredUsers, function(userNew) {
+        //     usersList.push(userNew);
+        // });
+        // usersList.push(user);
+        $localStorage.registeredUsers = user;
     };
     this.getLoggedUserData = function() {
         return this.loggedUserData;

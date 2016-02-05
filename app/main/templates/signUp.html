@@ -1,24 +1,43 @@
 <ion-pane>
-    <ion-content scroll="false" ng-controller="signupCtrl">
-        <form name="signUp">
+    <ion-content scroll="false">
+        <form name="signUp" novalidate>
             <div style="margin:0 auto;width:100%;position:absolute;top:50%;transform:translateY(-50%);padding: 15% 10%;">
                 <div class="list">
                     <div class="item item-input-inset elem-bottomSpace">
                         <label class="item-input-wrapper">
-                            <input type="text" placeholder="Username" id="uname" name="uname" ng-model="uname" sign-up-directive>
+                            <input type="text" placeholder="First Name" id="fname" name="fname" ng-model="fname" required>
                         </label>
                     </div>
-                    <div class="item error-text" ng-if="signUp.uname.$error.validUname">
+                    <div class="item error-text" ng-if="signUp.fname.$invalid && !signUp.fname.$pristine">
                         <label>
-                            Enter valid user name.
+                            Enter valid first name.
                         </label>
                     </div>
                     <div class="item item-input-inset elem-bottomSpace">
                         <label class="item-input-wrapper">
-                            <input type="password" placeholder="Password" ng-model="pwd" id="pwd" name="pwd" sign-up-directive>
+                            <input type="text" placeholder="Last Name" id="lname" name="lname" ng-model="lname" required>
                         </label>
                     </div>
-                    <!-- {{signUp.pwd.$error.validPwd}} -->
+                    <div class="item error-text" ng-if="signUp.lname.$invalid && !signUp.lname.$pristine">
+                        <label>
+                            Enter valid last name.
+                        </label>
+                    </div>
+                    <div class="item item-input-inset elem-bottomSpace">
+                        <label class="item-input-wrapper">
+                            <input type="email" placeholder="Email" id="email" name="email" ng-model="email" required>
+                        </label>
+                    </div>
+                    <div class="item error-text" ng-if="signUp.email.$invalid && !signUp.email.$pristine">
+                        <label>
+                            Enter valid Email
+                        </label>
+                    </div>
+                    <div class="item item-input-inset elem-bottomSpace">
+                        <label class="item-input-wrapper">
+                            <input type="password" placeholder="Password" ng-model="pwd" id="pwd" name="pwd" sign-up-directive required>
+                        </label>
+                    </div>
                     <div class="item error-text" ng-if="signUp.pwd.$error.validPwd">
                         <label>
                             Password should be alphanumeric.
@@ -26,16 +45,16 @@
                     </div>
                     <div class="item item-input-inset elem-bottomSpace">
                         <label class="item-input-wrapper">
-                            <input type="password" placeholder="Confirm Password" ng-model="cpwd">
+                            <input type="password" placeholder="Confirm Password" ng-model="cpwd" required>
                         </label>
                     </div>
-                    <div class="item error-text" ng-if="">
+                    <div class="item error-text" ng-if="validCPwd">
                         <label>
                             Retype correct password.
                         </label>
                     </div>
                 </div>
-                <button class="button button-large button-positive" style="display:block;margin:0 auto;margin-top:5%;min-height:40px;line-height:40px;">
+                <button class="button button-large button-positive" style="display:block;margin:0 auto;margin-top:5%;min-height:40px;line-height:40px;" ng-disabled="signUp.$invalid" ng-click="signUpController.signUpClicked()">
                     Sign Up
                 </button>
             </div>
