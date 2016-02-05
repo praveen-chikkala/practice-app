@@ -1,5 +1,5 @@
 var app = angular.module('main');
-app.controller('loginCtrl', ['$scope', '$state', 'localService', function($scope, $state, localService) {
+app.controller('loginCtrl', ['$scope', '$state', 'localService', 'customService', function($scope, $state, localService, customService) {
     var loginController = this;
     loginController.checkStorage = function() {
         console.log("hello");
@@ -20,21 +20,38 @@ app.controller('loginCtrl', ['$scope', '$state', 'localService', function($scope
         if (loginController.isRemembered) {
             //dolocalstorage
             localService.setRegisteredUsers(loginController.email, loginController.pwd);
-
-        } else {
-            //dologin api call
-            var data = {
-                "action": "loginAction",
-                "authkey": "k3w0We8.qGhNb1ldzs",
-                "eml": loginController.email,
-                "pass": loginController.pwd
-            };
-            http.post('http://103.230.84.14/userservice.php', data).then(function(data) {
-                console.log(data);
-            }, function(error) {
-                console.log(error);
-            });
         }
+        var data = {
+            "action": "loginAction",
+            "authkey": "k3w0We8.qGhNb1ldzs",
+            "eml": loginController.email,
+            "pass": loginController.pwd
+        };
+        var dataOne = {
+            "action": "loginAction",
+            "authkey": "k3w0We8.qGhNb1ldzs",
+            "eml": "sunukamal.sparks@gmail.com",
+            "pass": "poc123"
+        };
+        customService.postCall($scope, "loginSuccess", "loginError", 'http://103.230.84.14/userservice.php', data);
+        customService.postCall($scope, "loginSuccessOne", "loginErrorOne", 'http://103.230.84.14/userservice.php', dataOne);
+        // http.post('http://103.230.84.14/userservice.php', data).then(function(data) {
+        //     console.log(data);
+        // }, function(error) {
+        //     console.log(error);
+        // });
+        $scope.loginSuccess = function(successData) {
+            console.log(successData);
+        };
+        $scope.loginError = function(errorData) {
+            console.log(errorData);
+        };
+        $scope.loginSuccessOne = function(successData) {
+            console.log(successData);
+        };
+        $scope.loginErrorOne = function(errorData) {
+            console.log(errorData);
+        };
     };
 }]);
 app.controller('signUpCtrl', ['$scope', '$http', function(scope, http) {
