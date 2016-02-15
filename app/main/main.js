@@ -22,14 +22,21 @@ angular.module('main', [
                 templateUrl: 'main/templates/forgotPwd.html'
             }).state('leftMenu', {
                 url: "/leftMenu",
-                abstract:true,
-               templateUrl: 'main/templates/leftMenu.html'
+                abstract: true,
+                templateUrl: 'main/templates/leftMenu.html'
             })
             .state('leftMenu.first', {
                 url: "/menuFirst",
                 views: {
                     'menuDynamic': {
                         templateUrl: "main/templates/signUp.html"
+                    }
+                }
+            }).state('leftMenu.second', {
+                url: "/menuSecond",
+                views: {
+                    'menuDynamic': {
+                        templateUrl: "main/templates/formOne.html"
                     }
                 }
             });
