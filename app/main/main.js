@@ -20,5 +20,17 @@ angular.module('main', [
             }).state('forgotPwd', {
                 url: "/forgotPwd",
                 templateUrl: 'main/templates/forgotPwd.html'
+            }).state('leftMenu', {
+                url: "/leftMenu",
+                abstract:true,
+               templateUrl: 'main/templates/leftMenu.html'
+            })
+            .state('leftMenu.first', {
+                url: "/menuFirst",
+                views: {
+                    'menuDynamic': {
+                        templateUrl: "main/templates/signUp.html"
+                    }
+                }
             });
     });
