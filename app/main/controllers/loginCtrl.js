@@ -52,6 +52,10 @@ app.controller('loginCtrl', ['$scope', '$state', 'localService', 'customService'
         $scope.loginErrorOne = function(errorData) {
             console.log(errorData);
         };
+
+    };
+    loginController.loadMenu = function() {
+        $state.go("leftMenu.first");
     };
 }]);
 app.controller('signUpCtrl', ['$scope', '$http', function(scope, http) {
@@ -80,5 +84,10 @@ app.controller('signUpCtrl', ['$scope', '$http', function(scope, http) {
         }, function(error) {
             console.log(error);
         });
+    };
+}]);
+app.controller('menuCtrl',['$scope','$state',function($scope,$state){
+    $scope.loadFirstMenu=function(){
+$state.go("leftMenu.first");
     };
 }]);
