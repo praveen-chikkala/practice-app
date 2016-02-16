@@ -86,8 +86,11 @@ app.controller('signUpCtrl', ['$scope', '$http', function(scope, http) {
         });
     };
 }]);
-app.controller('menuCtrl',['$scope','$state',function($scope,$state){
-    $scope.loadFirstMenu=function(){
-$state.go("leftMenu.first");
+app.controller('menuCtrl', ['$scope', '$state', function($scope, $state) {
+    $scope.loadFirstMenu = function() {
+        $state.go("leftMenu.first");
+    };
+    $scope.loadSecondMenu = function() {
+        $state.go("leftMenu.second");
     };
 }]);
