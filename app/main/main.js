@@ -23,10 +23,12 @@ angular.module('main', [
             }).state('leftMenu', {
                 url: "/leftMenu",
                 abstract: true,
-                templateUrl: 'main/templates/leftMenu.html'
+                templateUrl: 'main/templates/leftMenu.html',
+                controller: 'menuCtrl'
             })
             .state('leftMenu.first', {
                 url: "/menuFirst",
+                cache: false,
                 views: {
                     'menuDynamic': {
                         templateUrl: "main/templates/signUp.html"
@@ -34,6 +36,7 @@ angular.module('main', [
                 }
             }).state('leftMenu.second', {
                 url: "/menuSecond",
+                cache: false,
                 views: {
                     'menuDynamic': {
                         templateUrl: "main/templates/formOne.html"

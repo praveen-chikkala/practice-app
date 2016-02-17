@@ -86,7 +86,9 @@ app.controller('signUpCtrl', ['$scope', '$http', function(scope, http) {
         });
     };
 }]);
+
 app.controller('menuCtrl', ['$scope', '$state', function($scope, $state) {
+    // var menuController = this;
     $scope.loadFirstMenu = function() {
         $state.go("leftMenu.first");
     };
@@ -94,3 +96,11 @@ app.controller('menuCtrl', ['$scope', '$state', function($scope, $state) {
         $state.go("leftMenu.second");
     };
 }]);
+app.controller("ExampleController", function($scope) {
+    $scope.images = [];
+    $scope.loadImages = function() {
+        for (var i = 0; i < 11; i++) {
+            $scope.images.push({ id: i, src: "http://placehold.it/150x150" });
+        }
+    };
+});
