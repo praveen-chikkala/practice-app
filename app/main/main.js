@@ -11,22 +11,28 @@ angular.module('main', [
         $stateProvider
             .state('login', {
                 url: '/login',
+                cache:false,
                 templateUrl: 'main/templates/login.html',
                 controller: 'loginCtrl as loginController'
             }).state('signUp', {
                 url: "/signUp",
+                cache:false,
                 templateUrl: 'main/templates/signUp.html',
                 controller: 'signUpCtrl as signUpController'
             }).state('forgotPwd', {
                 url: "/forgotPwd",
+                cache:false,
                 templateUrl: 'main/templates/forgotPwd.html'
             }).state('leftMenu', {
                 url: "/leftMenu",
                 abstract: true,
-                templateUrl: 'main/templates/leftMenu.html'
+                cache:false,
+                templateUrl: 'main/templates/leftMenu.html',
+                controller: 'menuCtrl'
             })
             .state('leftMenu.first', {
                 url: "/menuFirst",
+                cache:false,
                 views: {
                     'menuDynamic': {
                         templateUrl: "main/templates/signUp.html"
@@ -34,9 +40,18 @@ angular.module('main', [
                 }
             }).state('leftMenu.second', {
                 url: "/menuSecond",
+                cache:false,
                 views: {
                     'menuDynamic': {
-                        templateUrl: "main/templates/formOne.html"
+                        templateUrl: "main/templates/login.html"
+                    }
+                }
+            }).state('leftMenu.third', {
+                url: "/menuThree",
+                cache:false,
+                views: {
+                    'menuDynamic': {
+                        templateUrl: "main/templates/forgotPwd.html"
                     }
                 }
             });

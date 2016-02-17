@@ -86,11 +86,17 @@ app.controller('signUpCtrl', ['$scope', '$http', function(scope, http) {
         });
     };
 }]);
-app.controller('menuCtrl', ['$scope', '$state', function($scope, $state) {
+app.controller('menuCtrl', ['$scope', '$state','$ionicSideMenuDelegate', function($scope, $state,$ionicSideMenuDelegate) {
     $scope.loadFirstMenu = function() {
         $state.go("leftMenu.first");
     };
+    $scope.swipedMenu=function(event){
+        console.log("swi");
+    };
     $scope.loadSecondMenu = function() {
         $state.go("leftMenu.second");
+    };
+     $scope.loadThirdMenu = function() {
+        $state.go("leftMenu.third");
     };
 }]);
