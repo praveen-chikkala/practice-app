@@ -54,5 +54,10 @@ angular.module('main', [
                         templateUrl: "main/templates/forgotPwd.html"
                     }
                 }
+            }).state('details', {
+                url: "/details",
+                cache:false,
+                templateUrl: "main/templates/details.html",
+                 controller: 'detailsCtrl'
             });
     });
