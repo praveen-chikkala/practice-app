@@ -43,7 +43,7 @@ angular.module('main', [
                 cache:false,
                 views: {
                     'menuDynamic': {
-                        templateUrl: "main/templates/login.html"
+                        templateUrl: "main/templates/formOne.html"
                     }
                 }
             }).state('leftMenu.third', {
