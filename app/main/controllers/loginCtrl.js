@@ -1,5 +1,5 @@
 var app = angular.module('main');
-app.controller('loginCtrl', ['$scope', '$state', 'localService', 'customService', function($scope, $state, localService, customService) {
+app.controller('loginCtrl', ['$scope', '$state', 'localService', 'customService', '$cordovaGeolocation', function($scope, $state, localService, customService, cordovaGeolocation) {
     var loginController = this;
     loginController.checkStorage = function() {
         console.log("hello");
@@ -10,6 +10,34 @@ app.controller('loginCtrl', ['$scope', '$state', 'localService', 'customService'
         }
     };
     loginController.checkStorage();
+    loginController.getLatLngs = function() {
+        //17.7241 and 83.3071 - complex co-ordinates.
+        cordovaGeolocation.getCurrentPosition().then(function(position) {
+            var lat = position.coords.latitude;
+            var long = position.coords.longitude;
+            console.log(lat + '   ' + long);
+            loginController.distance(lat, long);
+        }, function(err) {
+            console.log(err);
+        });
+
+    };
+
+    loginController.distance = function(lat2, lon2) {
+        var lat1 = 17.7241;
+        var lon1 = 83.3071;
+        var radlat1 = Math.PI * lat1 / 180;
+        var radlat2 = Math.PI * lat2 / 180;
+        var theta = lon1 - lon2;
+        var radtheta = Math.PI * theta / 180;
+        var dist = Math.sin(radlat1) * Math.sin(radlat2) + Math.cos(radlat1) * Math.cos(radlat2) * Math.cos(radtheta);
+        dist = Math.acos(dist);
+        dist = dist * 180 / Math.PI;
+        dist = dist * 60 * 1.1515;
+        dist = dist * 1.609344;
+        console.log(dist);
+    };
+    loginController.getLatLngs()
     loginController.loadSignUp = function() {
         $state.go("signUp");
     };
@@ -87,44 +115,44 @@ app.controller('signUpCtrl', ['$scope', '$http', function(scope, http) {
     };
 }]);
 
-app.controller('menuCtrl', ['$scope', '$state','$ionicSideMenuDelegate', function($scope, $state,$ionicSideMenuDelegate) {
+app.controller('menuCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', function($scope, $state, $ionicSideMenuDelegate) {
     $scope.loadFirstMenu = function() {
         $state.go("leftMenu.first");
     };
-    $scope.swipedMenu=function(event){
+    $scope.swipedMenu = function(event) {
         console.log("swi");
     };
     $scope.loadSecondMenu = function() {
         $state.go("leftMenu.second");
     };
-     $scope.loadThirdMenu = function() {
+    $scope.loadThirdMenu = function() {
         $state.go("leftMenu.third");
     };
 }]);
-app.controller('detailsCtrl', ['$scope', '$state','$ionicSlideBoxDelegate', function($scope, $state, $ionicSlideBoxDelegate) {
-  $scope.ItemDetails = [{
-        'imageUrl' : 'main/assets/images/1.jpg'
+app.controller('detailsCtrl', ['$scope', '$state', '$ionicSlideBoxDelegate', function($scope, $state, $ionicSlideBoxDelegate) {
+    $scope.ItemDetails = [{
+        'imageUrl': 'main/assets/images/1.jpg'
     }, {
-        'imageUrl' : 'main/assets/images/2.jpg'
+        'imageUrl': 'main/assets/images/2.jpg'
     }, {
-        'imageUrl' : 'main/assets/images/3.jpg'
+        'imageUrl': 'main/assets/images/3.jpg'
     }, {
-        'imageUrl' : 'main/assets/images/4.jpg'
+        'imageUrl': 'main/assets/images/4.jpg'
     }, {
-        'imageUrl' : 'main/assets/images/5.jpg'
+        'imageUrl': 'main/assets/images/5.jpg'
     }, {
-        'imageUrl' : 'main/assets/images/6.jpg'
+        'imageUrl': 'main/assets/images/6.jpg'
     }, {
-        'imageUrl' : 'main/assets/images/7.jpg'
+        'imageUrl': 'main/assets/images/7.jpg'
     }, {
-        'imageUrl' : 'main/assets/images/8.jpg'
+        'imageUrl': 'main/assets/images/8.jpg'
     }, {
-        'imageUrl' : 'main/assets/images/9.jpg'
+        'imageUrl': 'main/assets/images/9.jpg'
     }, {
-        'imageUrl' : 'main/assets/images/10.jpg'
+        'imageUrl': 'main/assets/images/10.jpg'
     }];
- 
-   
+
+
 }]);
 app.controller("ExampleController", ['$scope','$state',function($scope,$state) {
     $scope.images = [];
