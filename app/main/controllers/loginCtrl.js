@@ -87,14 +87,44 @@ app.controller('signUpCtrl', ['$scope', '$http', function(scope, http) {
     };
 }]);
 
-app.controller('menuCtrl', ['$scope', '$state', function($scope, $state) {
-    // var menuController = this;
+app.controller('menuCtrl', ['$scope', '$state','$ionicSideMenuDelegate', function($scope, $state,$ionicSideMenuDelegate) {
     $scope.loadFirstMenu = function() {
         $state.go("leftMenu.first");
+    };
+    $scope.swipedMenu=function(event){
+        console.log("swi");
     };
     $scope.loadSecondMenu = function() {
         $state.go("leftMenu.second");
     };
+     $scope.loadThirdMenu = function() {
+        $state.go("leftMenu.third");
+    };
+}]);
+app.controller('detailsCtrl', ['$scope', '$state','$ionicSlideBoxDelegate', function($scope, $state, $ionicSlideBoxDelegate) {
+  $scope.ItemDetails = [{
+        'imageUrl' : 'main/assets/images/1.jpg'
+    }, {
+        'imageUrl' : 'main/assets/images/2.jpg'
+    }, {
+        'imageUrl' : 'main/assets/images/3.jpg'
+    }, {
+        'imageUrl' : 'main/assets/images/4.jpg'
+    }, {
+        'imageUrl' : 'main/assets/images/5.jpg'
+    }, {
+        'imageUrl' : 'main/assets/images/6.jpg'
+    }, {
+        'imageUrl' : 'main/assets/images/7.jpg'
+    }, {
+        'imageUrl' : 'main/assets/images/8.jpg'
+    }, {
+        'imageUrl' : 'main/assets/images/9.jpg'
+    }, {
+        'imageUrl' : 'main/assets/images/10.jpg'
+    }];
+ 
+   
 }]);
 app.controller("ExampleController", function($scope) {
     $scope.images = [];
