@@ -126,11 +126,15 @@ app.controller('detailsCtrl', ['$scope', '$state','$ionicSlideBoxDelegate', func
  
    
 }]);
-app.controller("ExampleController", function($scope) {
+app.controller("ExampleController", ['$scope','$state',function($scope,$state) {
     $scope.images = [];
     $scope.loadImages = function() {
         for (var i = 0; i < 11; i++) {
             $scope.images.push({ id: i, src: "http://placehold.it/150x150" });
         }
     };
-});
+    $scope.gotoDetails=function(evt,obj){
+    	console.log(obj);
+    	 $state.go("details");
+    };
+}]);
