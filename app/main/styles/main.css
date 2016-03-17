@@ -8,3 +8,14 @@
 .elem-bottomSpace {
     margin-bottom: 10px;
 }
+.slider .slider-pager{
+	bottom:15px;
+}
+.glo-bg{
+	background: #FB2121 !important;
+	color: white !important;
+	border:none;
+}
+.bar-stable .button.button-clear,.basic-col{
+	color: #FB2121;
+}

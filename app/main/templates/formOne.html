@@ -1,4 +1,7 @@
 <ion-view cache-view="false">
+ <ion-nav-title class="basic-col">
+     Grid View
+    </ion-nav-title>
 <ion-pane>
     <ion-content ng-controller="ExampleController" ng-init="loadImages()" class="has-header">
         <div class="row" ng-repeat="image in images" ng-if="$index % 2 === 0">
