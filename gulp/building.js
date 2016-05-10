@@ -11,7 +11,7 @@ var vinylPaths = require('vinyl-paths');
 
 var buildDependencies = [
  // options['force-build'] ? 'linting' : 'linting-throw',
-  'build-app',
+ 'build-app',
   'build-templates',
   'build-assets'
 ];

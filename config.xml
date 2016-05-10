@@ -19,6 +19,10 @@
     <platform name="android">
         <allow-intent href="market:*" />
     </platform>
+     <platform name="android">
+        <preference name="SplashScreenDelay" value="4000" />
+          <preference name="FadeSplashScreenDuration" value="000"/>
+    </platform>
     <platform name="ios">
         <allow-intent href="itms:*" />
         <allow-intent href="itms-apps:*" />

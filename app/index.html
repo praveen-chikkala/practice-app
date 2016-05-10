@@ -14,6 +14,7 @@
     <!-- build:css styles/vendor.css -->
     <!-- bower:css -->
     <link rel="stylesheet" href="bower_components/ionic/release/css/ionic.css" />
+    <link rel="stylesheet" href="bower_components/ionic-tour/ionic.tour.css" />
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:css main/styles/app.css -->
@@ -23,7 +24,7 @@
     <!-- endbuild -->
 </head>
 
-<body ng-app="PocDX">
+<body ng-app="PocDX" ng-controller="tourController">
     <!-- the nav bar will be updated as we navigate between views -->
     <!-- <ion-nav-bar> can be removed when using sidemenu (contained in menu.html) -->
     <!-- the current view will be rendered in the <ion-nav-view> directive -->
@@ -46,6 +47,8 @@
     <script src="bower_components/ngstorage/ngStorage.js"></script>
     <script src="bower_components/ng-cordova-oauth/dist/ng-cordova-oauth.js"></script>
     <script src="bower_components/ng-cordova-oauth/dist/ng-cordova-oauth.min.js"></script>
+    <script src="bower_components/collide/collide.js"></script>
+    <script src="bower_components/ionic-tour/ionic.tour.js"></script>
     <!-- endbower -->
     <!-- endbuild -->
     <!-- build:js scripts/app.js -->

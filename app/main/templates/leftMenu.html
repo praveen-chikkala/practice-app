@@ -1,24 +1,24 @@
 <ion-view cache-view="false">
 <ion-pane>
-<ion-side-menus enable-menu-with-back-views="true">
+<ion-side-menus enable-menu-with-back-views="true" class="glo-bg">
     <ion-side-menu-content  drag-content="false">
-        <ion-nav-bar class="bar-stable">
+        <ion-nav-bar class="bar-stable basic-col">
             <ion-nav-buttons side="left">
-                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+                <button tour-step="1" tour-on-leave="openMenuLeft" class="button button-icon button-clear ion-navicon" menu-toggle="left">
                 </button>
             </ion-nav-buttons>
         </ion-nav-bar>
         <ion-nav-view name="menuDynamic" nav-transition="ios" nav-direction="exit" nav-view-direction="exit" ></ion-nav-view>
     </ion-side-menu-content>
-    <ion-side-menu delegate-handle="leftHandle" side="left">
-        <ion-header-bar class="bar-stable">
-            <h1 class="title">Left</h1>
+    <ion-side-menu delegate-handle="leftHandle" side="left" class="glo-bg">
+        <ion-header-bar class="glo-bg">
+            <h1 class="title glo-bg">Menu</h1>
         </ion-header-bar>
-        <ion-content class="has-header">
+        <ion-content class="has-header" >
             <ion-list>
-                <ion-item menu-close ng-click="loadFirstMenu()">Sign Up</ion-item>
-                <ion-item menu-close ng-click="loadSecondMenu()">Trial</ion-item>
-                <ion-item menu-close ng-click="loadThirdMenu()">Trial2</ion-item>
+                <ion-item menu-close ng-click="loadFirstMenu()" class="glo-bg">Sign Up</ion-item>
+                <ion-item menu-close ng-click="loadSecondMenu()" class="glo-bg" tour-step="2" tour-on-leave="closMenuLeft">Grid</ion-item>
+                <ion-item menu-close ng-click="loadThirdMenu()" class="glo-bg">Forgot Pwd</ion-item>
                <!--  <ion-item>Item3</ion-item>
                 <ion-item>Item4</ion-item>
                 <ion-item>Item5</ion-item>
