@@ -1,5 +1,5 @@
 var app = angular.module('main');
-app.controller('loginCtrl', ['$scope', '$state', 'localService', 'customService', '$cordovaGeolocation', function($scope, $state, localService, customService, cordovaGeolocation) {
+app.controller('loginCtrl', ['$scope', '$state', 'localService', 'customService', '$cordovaGeolocation', '$cordovaOauth', '$http', function($scope, $state, localService, customService, cordovaGeolocation, $cordovaOauth, $http) {
     var loginController = this;
     loginController.checkStorage = function() {
         console.log("hello");
@@ -44,44 +44,64 @@ app.controller('loginCtrl', ['$scope', '$state', 'localService', 'customService'
     loginController.loadforgotPwd = function() {
         $state.go("forgotPwd");
     };
+    loginController.displayData = function($http, access_token) {
+        $http.get("https://graph.facebook.com/v2.2/me", { params: { access_token: access_token, fields: "name,gender,location,picture", format: "json" } }).then(function(result) {
+            var name = result.data.name;
+            var gender = result.data.gender;
+            var picture = result.data.picture;
+            alert(name);
+            console.log(name + "   " + gender);
+            console.log(result);
+        }, function(error) {
+            alert("Error: " + error);
+        });
+    }
     loginController.login = function() {
-        if (loginController.isRemembered) {
-            //dolocalstorage
-            localService.setRegisteredUsers(loginController.email, loginController.pwd);
-        }
-        var data = {
-            "action": "loginAction",
-            "authkey": "k3w0We8.qGhNb1ldzs",
-            "eml": loginController.email,
-            "pass": loginController.pwd
-        };
-        var dataOne = {
-            "action": "loginAction",
-            "authkey": "k3w0We8.qGhNb1ldzs",
-            "eml": "sunukamal.sparks@gmail.com",
-            "pass": "poc123"
-        };
-        customService.postCall($scope, "loginSuccess", "loginError", 'http://103.230.84.14/userservice.php', data);
-        customService.postCall($scope, "loginSuccessOne", "loginErrorOne", 'http://103.230.84.14/userservice.php', dataOne);
-        // http.post('http://103.230.84.14/userservice.php', data).then(function(data) {
-        //     console.log(data);
-        // }, function(error) {
-        //     console.log(error);
-        // });
-        $scope.loginSuccess = function(successData) {
-            console.log(successData);
-        };
-        $scope.loginError = function(errorData) {
-            console.log(errorData);
-        };
-        $scope.loginSuccessOne = function(successData) {
-            console.log(successData);
-        };
-        $scope.loginErrorOne = function(errorData) {
-            console.log(errorData);
-        };
+        // if (loginController.isRemembered) {
+        //     //dolocalstorage
+        //     localService.setRegisteredUsers(loginController.email, loginController.pwd);
+        // }
+        // var data = {
+        //     "action": "loginAction",
+        //     "authkey": "k3w0We8.qGhNb1ldzs",
+        //     "eml": loginController.email,
+        //     "pass": loginController.pwd
+        // };
+        // var dataOne = {
+        //     "action": "loginAction",
+        //     "authkey": "k3w0We8.qGhNb1ldzs",
+        //     "eml": "sunukamal.sparks@gmail.com",
+        //     "pass": "poc123"
+        // };
+        // customService.postCall($scope, "loginSuccess", "loginError", 'http://103.230.84.14/userservice.php', data);
+        // customService.postCall($scope, "loginSuccessOne", "loginErrorOne", 'http://103.230.84.14/userservice.php', dataOne);
+        // // http.post('http://103.230.84.14/userservice.php', data).then(function(data) {
+        // //     console.log(data);
+        // // }, function(error) {
+        // //     console.log(error);
+        // // });
+        // $scope.loginSuccess = function(successData) {
+        //     console.log(successData);
+        // };
+        // $scope.loginError = function(errorData) {
+        //     console.log(errorData);
+        // };
+        // $scope.loginSuccessOne = function(successData) {
+        //     console.log(successData);
+        // };
+        // $scope.loginErrorOne = function(errorData) {
+        //     console.log(errorData);
+        // };
+        $cordovaOauth.facebook("1690825224505069", ["email", "public_profile"], { redirect_uri: "http://localhost/" }).then(function(result) {
+            alert("success: " + result.access_token);
+            console.log(result.access_token);
+            loginController.displayData($http, result.access_token);
+        }, function(error) {
+            alert("Error: " + error);
+        });
 
     };
+    
     loginController.loadMenu = function() {
         $state.go("leftMenu.first");
     };
@@ -154,15 +174,15 @@ app.controller('detailsCtrl', ['$scope', '$state', '$ionicSlideBoxDelegate', fun
 
 
 }]);
-app.controller("ExampleController", ['$scope','$state',function($scope,$state) {
+app.controller("ExampleController", ['$scope', '$state', function($scope, $state) {
     $scope.images = [];
     $scope.loadImages = function() {
         for (var i = 0; i < 11; i++) {
             $scope.images.push({ id: i, src: "http://placehold.it/150x150" });
         }
     };
-    $scope.gotoDetails=function(evt,obj){
-    	console.log(obj);
-    	 $state.go("details");
+    $scope.gotoDetails = function(evt, obj) {
+        console.log(obj);
+        $state.go("details");
     };
 }]);

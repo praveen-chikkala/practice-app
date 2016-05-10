@@ -3,7 +3,8 @@ angular.module('main', [
         'ionic',
         'ngCordova',
         'ui.router',
-        'ngStorage'
+        'ngStorage',
+        'ngCordovaOauth'
         // TODO: load other modules selected during generation
     ])
     .config(function($stateProvider, $urlRouterProvider) {
