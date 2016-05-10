@@ -115,12 +115,9 @@ app.controller('signUpCtrl', ['$scope', '$http', function(scope, http) {
     };
 }]);
 
-app.controller('menuCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', function($scope, $state, $ionicSideMenuDelegate) {
+app.controller('menuCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', '$timeout', function($scope, $state, $ionicSideMenuDelegate, $timeout) {
     $scope.loadFirstMenu = function() {
         $state.go("leftMenu.first");
-    };
-    $scope.swipedMenu = function(event) {
-        console.log("swi");
     };
     $scope.loadSecondMenu = function() {
         $state.go("leftMenu.second");
@@ -128,6 +125,23 @@ app.controller('menuCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', functi
     $scope.loadThirdMenu = function() {
         $state.go("leftMenu.third");
     };
+    $scope.openMenuLeft = function(element, tourtip) {
+        $ionicSideMenuDelegate.toggleLeft(true);
+    };
+    $scope.closMenuLeft = function(element, tourtip) {
+        $scope.loadSecondMenu();
+        $ionicSideMenuDelegate.toggleLeft(false);
+    };
+
+    function initiateTour() {
+        console.log("enter tour");
+        $scope.tour.removeStep("1");
+        $scope.tour.start({ autoplay: true });
+    };
+    $timeout(function() {
+        initiateTour();
+    }, 500);
+
 }]);
 app.controller('detailsCtrl', ['$scope', '$state', '$ionicSlideBoxDelegate', function($scope, $state, $ionicSlideBoxDelegate) {
     $scope.ItemDetails = [{
@@ -154,15 +168,57 @@ app.controller('detailsCtrl', ['$scope', '$state', '$ionicSlideBoxDelegate', fun
 
 
 }]);
-app.controller("ExampleController", ['$scope','$state',function($scope,$state) {
+app.controller("ExampleController", ['$scope', '$state', '$timeout', '$compile', function($scope, $state, $timeout, $compile) {
     $scope.images = [];
     $scope.loadImages = function() {
         for (var i = 0; i < 11; i++) {
             $scope.images.push({ id: i, src: "http://placehold.it/150x150" });
         }
     };
-    $scope.gotoDetails=function(evt,obj){
-    	console.log(obj);
-    	 $state.go("details");
+    $scope.gotoDetails = function(evt, obj) {
+        console.log(obj);
+        $state.go("details");
+    };
+    $timeout(function() {
+        var trstp = document.getElementById('tourdyn');
+        angular.element(trstp).append($compile("<div tour-step='3' style='position:relative;top:0px;'></div>")($scope));
+        $scope.tour.next();
+        console.log($scope.tour);
+    }, 00);
+}]);
+app.controller("tourController", ['$scope', '$state', '$ionicTour', '$ionicSideMenuDelegate', function($scope, $state, $ionicTour, $ionicSideMenuDelegate) {
+    console.log("main load");
+    $scope.tourTitle = "Demo";
+    $scope.tourContent = "Entertainment";
+    $ionicTour.fromTemplateUrl('main/templates/tourLayout.html', {
+        scope: $scope
+    }).then(function(tour) {
+        $scope.tour = tour;
+    });
+    $scope.next = function() {
+        console.log("Next");
+        console.log($scope.tour);
+        if ($scope.tour._index === 1) {
+            $state.go("leftMenu.second");
+            $ionicSideMenuDelegate.toggleLeft(false);
+        }
+         if ($scope.tour._index === 2) {
+            $state.go("details");
+        }
+        $scope.tour.next();
+    };
+
+    $scope.previous = function() {
+        $scope.tour.previous();
+    };
+    $scope.finish = function() {
+        console.log("cleared");
+        $scope.tour.finish({
+            destroy: false
+        });
+    };
+
+    $scope.reset = function() {
+        $scope.tour.reset();
     };
 }]);

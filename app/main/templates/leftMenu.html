@@ -4,7 +4,7 @@
     <ion-side-menu-content  drag-content="false">
         <ion-nav-bar class="bar-stable basic-col">
             <ion-nav-buttons side="left">
-                <button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+                <button tour-step="1" tour-on-leave="openMenuLeft" class="button button-icon button-clear ion-navicon" menu-toggle="left">
                 </button>
             </ion-nav-buttons>
         </ion-nav-bar>
@@ -17,7 +17,7 @@
         <ion-content class="has-header" >
             <ion-list>
                 <ion-item menu-close ng-click="loadFirstMenu()" class="glo-bg">Sign Up</ion-item>
-                <ion-item menu-close ng-click="loadSecondMenu()" class="glo-bg">Grid</ion-item>
+                <ion-item menu-close ng-click="loadSecondMenu()" class="glo-bg" tour-step="2" tour-on-leave="closMenuLeft">Grid</ion-item>
                 <ion-item menu-close ng-click="loadThirdMenu()" class="glo-bg">Forgot Pwd</ion-item>
                <!--  <ion-item>Item3</ion-item>
                 <ion-item>Item4</ion-item>
