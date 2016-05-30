@@ -10,7 +10,7 @@ app.service('customService', ['$http', function($http) {
     this.postCall = function(postScope, successCall, errorCall, url, data, config) {
         $http.post(url, data, config).then(function(successData) {
             postScope[successCall](successData);
-        }, function(successData) {
+        }, function(errorData) {
             postScope.loginError(errorData);
         });
     };

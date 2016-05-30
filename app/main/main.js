@@ -45,7 +45,20 @@ angular.module('main', [
         cache: false,
         views: {
           'menuDynamic': {
-            templateUrl: "main/templates/formOne.html"
+            templateUrl: "main/templates/formOne.html",
+            resolve: {
+              imagesData: ['$q', 'imageService',
+                function($q, imageService) {
+                  if (imageService.getImagesList().length > 0)
+                    return $q.resolve(imageService.getImagesList());
+                  else
+                    return $q.reject({
+                      isValid: false
+                    });
+                }
+              ]
+            },
+            controller: 'exampleCtrl as ExampleController'
           }
         }
       }).state('leftMenu.third', {
@@ -63,3 +76,13 @@ angular.module('main', [
         controller: 'detailsCtrl'
       });
   });
+angular.module('main').run(function($state, $rootScope, customPopup) {
+  $rootScope.$on('$stateChangeError', function(event, toState, toParams, fromState, fromParams, error) {
+    // event.preventDefault();
+    // $state.go('error', JSON.stringify(error)); // error has data, status and config properties
+    console.log("error");
+    if (!error.isValid) {
+      customPopup.showPopup("Alert","No images found");
+    }
+  });
+});
