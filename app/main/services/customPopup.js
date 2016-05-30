@@ -15,8 +15,7 @@ app.service('customPopup', ['$ionicPopup', function($ionicPopup) {
     });
     openPopup.then(function(res) {
       if (res) {
-        console.log('Tapped OK');
-        return x.tappedYes();
+       return x.tappedYes();
       }
     });
 

@@ -2,27 +2,25 @@ var app = angular.module('main');
 app.controller('loginCtrl', ['$scope', '$state', 'localService', 'customService', '$cordovaGeolocation', '$cordovaOauth', '$http', 'imageService', function($scope, $state, localService, customService, cordovaGeolocation, $cordovaOauth, $http, imageService) {
   var loginController = this;
   loginController.checkStorage = function() {
-    console.log("hello");
-    console.log(localService.getRegisteredUsers());
     if (localService.getRegisteredUsers()) {
       loginController.pwd = localService.getRegisteredUsers().password;
       loginController.isRemembered = true;
     }
   };
   loginController.checkStorage();
+  //Function to get current latlngs using cordovageolocation plugin
   loginController.getLatLngs = function() {
     //17.7241 and 83.3071 - complex co-ordinates.
     cordovaGeolocation.getCurrentPosition().then(function(position) {
       var lat = position.coords.latitude;
       var long = position.coords.longitude;
-      console.log(lat + '   ' + long);
       loginController.distance(lat, long);
     }, function(err) {
       console.log(err);
     });
 
   };
-
+  //Function to get distance between two geopoints
   loginController.distance = function(lat2, lon2) {
     var lat1 = 17.7241;
     var lon1 = 83.3071;
@@ -43,18 +41,18 @@ app.controller('loginCtrl', ['$scope', '$state', 'localService', 'customService'
   loginController.loadforgotPwd = function() {
     $state.go("forgotPwd");
   };
+  /*
+  //Function to get user's fb public data using the success access_token
   loginController.displayData = function($http, access_token) {
     $http.get("https://graph.facebook.com/v2.2/me", { params: { access_token: access_token, fields: "name,gender,location,picture", format: "json" } }).then(function(result) {
       var name = result.data.name;
       var gender = result.data.gender;
       var picture = result.data.picture;
       alert(name);
-      console.log(name + "   " + gender);
-      console.log(result);
     }, function(error) {
       alert("Error: " + error);
     });
-  }
+  };*/
   loginController.login = function() {
     if (loginController.isRemembered) {
       //dolocalstorage
@@ -80,7 +78,6 @@ app.controller('loginCtrl', ['$scope', '$state', 'localService', 'customService'
     //     console.log(error);
     // });
     $scope.loginSuccess = function(successData) {
-      console.log(successData);
       var dataOne = {
         "accTk": successData.data.posts[2].accessToken,
         "action": "getThemeList",
@@ -92,7 +89,6 @@ app.controller('loginCtrl', ['$scope', '$state', 'localService', 'customService'
       console.log(errorData);
     };
     $scope.loginSuccessOne = function(successData) {
-      console.log(successData);
       _.each(successData.data.posts[1].resultPost, function(post) {
         imageService.setImagesList(post.globalsettings[0].background.imageurl);
       });
@@ -102,13 +98,16 @@ app.controller('loginCtrl', ['$scope', '$state', 'localService', 'customService'
     $scope.loginErrorOne = function(errorData) {
       console.log(errorData);
     };
-    // $cordovaOauth.facebook("1690825224505069", ["email", "public_profile"], { redirect_uri: "http://localhost/" }).then(function(result) {
-    //     alert("success: " + result.access_token);
-    //     console.log(result.access_token);
-    //     loginController.displayData($http, result.access_token);
-    // }, function(error) {
-    //     console.log("Error: " + error);
-    // });
+    /*
+    //cordova facebook plugin to get fb authentication usinf fb-dev app id
+    $cordovaOauth.facebook("1690825224505069", ["email", "public_profile"], { redirect_uri: "http://localhost/" }).then(function(result) {
+        alert("success: " + result.access_token);
+        console.log(result.access_token);
+        loginController.displayData($http, result.access_token);
+    }, function(error) {
+        console.log("Error: " + error);
+    });
+    */
 
   };
   loginController.loadMenu = function() {
@@ -197,15 +196,12 @@ app.controller('detailsCtrl', ['$scope', '$state', '$ionicSlideBoxDelegate', fun
 
 
 }]);
-app.controller("exampleCtrl", ['$scope', '$state', '$timeout', '$compile', 'imageService', 'imagesData', '$q', 'customPopup', function($scope, $state, $timeout, $compile, imageService, imagesData, $q, customPopup) {
-  console.log("entered");
+app.controller("gridCtrl", ['$scope', '$state', '$timeout', '$compile', 'imageService', 'imagesData', '$q', 'customPopup', function($scope, $state, $timeout, $compile, imageService, imagesData, $q, customPopup) {
   $scope.images = [];
   $scope.loadImages = function() {
     for (var i = 0; i < 11; i++) {
       $scope.images.push({ id: i, src: "http://placehold.it/150x150" });
     }
-    // $scope.images = imageService.getImagesList();
-    console.log($scope.images);
   };
   var images = imagesData;
   for (var i = 0; i < images.length; i++) {
@@ -215,10 +211,8 @@ app.controller("exampleCtrl", ['$scope', '$state', '$timeout', '$compile', 'imag
     console.log("yes is tapped");
   };
   //$scope.images = imageService.getImagesList();
-  console.log($scope.images);
   $scope.gotoDetails = function(evt, obj) {
     customPopup.showPopup("Details", "Showing Image details", $scope);
-    console.log(obj);
     $state.go("details");
   };
   $timeout(function() {

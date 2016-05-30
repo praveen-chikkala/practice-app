@@ -58,7 +58,7 @@ angular.module('main', [
                 }
               ]
             },
-            controller: 'exampleCtrl as ExampleController'
+            controller: 'gridCtrl as GridController'
           }
         }
       }).state('leftMenu.third', {
