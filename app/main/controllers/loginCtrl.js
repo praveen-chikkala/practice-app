@@ -143,7 +143,7 @@ app.controller('signUpCtrl', ['$scope', '$http', function(scope, http) {
   };
 }]);
 
-app.controller('menuCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', '$timeout', function($scope, $state, $ionicSideMenuDelegate, $timeout) {
+app.controller('menuCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', '$timeout',function($scope, $state, $ionicSideMenuDelegate, $timeout) {
   $scope.loadFirstMenu = function() {
     $state.go("leftMenu.first");
   };
@@ -160,7 +160,9 @@ app.controller('menuCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', '$time
     $scope.loadSecondMenu();
     $ionicSideMenuDelegate.toggleLeft(false);
   };
-
+  $scope.signout=function(){
+    $state.go("login");
+  }
   function initiateTour() {
     console.log("enter tour");
     //$scope.tour.removeStep("1");
@@ -171,7 +173,7 @@ app.controller('menuCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', '$time
   }, 500);
 
 }]);
-app.controller('detailsCtrl', ['$scope', '$state', '$ionicSlideBoxDelegate', function($scope, $state, $ionicSlideBoxDelegate) {
+app.controller('detailsCtrl', ['$scope', '$state', '$ionicSlideBoxDelegate', '$ionicHistory',function($scope, $state, $ionicSlideBoxDelegate,$ionicHistory) {
   $scope.ItemDetails = [{
     'imageUrl': 'main/assets/images/1.jpg'
   }, {
@@ -193,8 +195,9 @@ app.controller('detailsCtrl', ['$scope', '$state', '$ionicSlideBoxDelegate', fun
   }, {
     'imageUrl': 'main/assets/images/10.jpg'
   }];
-
-
+  $scope.goBackNow=function(){
+    $ionicHistory.goBack();
+  };
 }]);
 app.controller("gridCtrl", ['$scope', '$state', '$timeout', '$compile', 'imageService', 'imagesData', '$q', 'customPopup', function($scope, $state, $timeout, $compile, imageService, imagesData, $q, customPopup) {
   $scope.images = [];
