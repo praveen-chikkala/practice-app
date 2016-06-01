@@ -162,7 +162,8 @@ app.controller('menuCtrl', ['$scope', '$state', '$ionicSideMenuDelegate', '$time
     }, 500);
 
 }]);
-app.controller('detailsCtrl', ['$scope', '$state', '$ionicSlideBoxDelegate', function($scope, $state, $ionicSlideBoxDelegate) {
+app.controller('detailsCtrl', ['$scope', '$state', '$ionicSlideBoxDelegate','$ionicHistory', function($scope, $state, $ionicSlideBoxDelegate, $ionicHistory) {
+    
     $scope.ItemDetails = [{
         'imageUrl': 'main/assets/images/1.jpg'
     }, {
@@ -184,6 +185,10 @@ app.controller('detailsCtrl', ['$scope', '$state', '$ionicSlideBoxDelegate', fun
     }, {
         'imageUrl': 'main/assets/images/10.jpg'
     }];
+
+    $scope.viewgoBack=function(){
+        $ionicHistory.goBack();
+    };
 
 
 }]);

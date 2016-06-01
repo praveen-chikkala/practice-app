@@ -9,7 +9,7 @@
     margin-bottom: 10px;
 }
 .slider .slider-pager{
-	bottom:15px;
+	/*bottom:15px;*/
 }
 .glo-bg{
 	background: #FB2121 !important;
@@ -18,4 +18,13 @@
 }
 .bar-stable .button.button-clear,.basic-col{
 	color: #FB2121;
+}
+.detail-carousel{
+	width: 250px;
+    height: 250px;
+    margin: 13px 0px 50px 0px;
+	/*display:block;*/
+}
+.carsel-img{
+	text-align: center;
 }
