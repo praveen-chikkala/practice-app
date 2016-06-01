@@ -15,7 +15,8 @@
     "ionic-tour": "*"
   },
   "devDependencies": {
-    "angular-mocks": "~1.4.5"
+    "angular-mocks": "~1.4.5",
+    "underscore": "^1.8.3"
   },
   "resolutions": {
     "angular": "~1.4.5",

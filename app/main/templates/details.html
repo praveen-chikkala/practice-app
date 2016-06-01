@@ -1,17 +1,20 @@
-<ion-view view-title="Details">
+<ion-view>
+    <ion-nav-bar>
+        <ion-nav-title class="basic-col">
+            Image Details
+        </ion-nav-title>
+        <ion-nav-buttons side="left">
+            <button class="button button-icon ion-ios-arrow-back" ng-click="goBackNow()"></button>
+        </ion-nav-buttons>
+    </ion-nav-bar>
     <ion-pane>
-        <ion-nav-bar>
-            <ion-nav-buttons side="left">
-                <button data-ng-click="viewgoBack()" class="button button-icon ion-ios-arrow-back"></button>
-            </ion-nav-buttons>
-        </ion-nav-bar>
         <ion-content class="has-header">
             <ion-slide-box on-slide-changed="" does-continue="true" tour-step="4">
-                <ion-slide ng-repeat="data in ItemDetails" class="carsel-img">
-                    <img ng-src="{{data.imageUrl}}" class="detail-carousel">
+                <ion-slide ng-repeat="data in ItemDetails">
+                    <img ng-src="{{data.imageUrl}}" style="width:300px;height:300px;margin:auto;display:block;margin-bottom:50px;">
                 </ion-slide>
             </ion-slide-box>
-            <div>
+             <div>
                 This is the basic description for jewellery details. It may include cost of the item or about the history of the item. It may include data about the related items. 
             </div>
 
